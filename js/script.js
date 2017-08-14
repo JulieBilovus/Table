@@ -1,5 +1,4 @@
 (function () {
-    /* ГЛОБАЛЬНІ ЗМІННІ */
     var students = [{
             name: 'Liudmyla',
             lastName: 'Bashta',
@@ -169,12 +168,7 @@
     var saveOrEdit = 0;
     var studentsIndex = 0;
     var editStudentIndex = 0;
-    /* завершення списку глобальних змінних */
-
     
-    /* ФУНКЦІЇ */
-    
-    /* створення форми для редагування та додавання нових студентів */
     function createTheForm () {
         var formTag = document.createElement('form');
         formTag.className = 'form createAndEditStudents';
@@ -183,37 +177,7 @@
         formTag.appendChild(header);
                            
         var inputTypes = ['text', 'text', 'email', 'url', 'text'];
-        var labels = ['name', 'lastname', 'email', 'URL of profile picture', 'skills'];
-        /*
-        inputs = [
-            {
-                type: 'text',
-                label: 'name',
-                element: document.createElement('input')
-            }
-        ]
-            
-             inputs = {
-                name: document.createElement('input'),
-                email: document.createElement('input')
-            };*/
-            
-            function updateForm(іщг) {
-//            user = {
-//                name,
-//                email
-//            };
-//            
-          
-            
-            for (var prop in inputs) {
-              if( inputs.hasOwnProperty( prop ) ) {
-                inputs[prop].element.value = user[prop];
-              } 
-            }
-            }
-            
-            
+        var labels = ['name', 'lastname', 'email', 'URL of profile picture', 'skills'];   
         
         var fieldsContainer = document.createElement('div');
         fieldsContainer.className = 'fieldsContainer';
@@ -235,6 +199,7 @@
             
             fieldsContainer.appendChild(field);
         }
+        
         formTag.appendChild(fieldsContainer);
         var saveBtn = document.createElement('input');
         saveBtn.setAttribute('type', 'button');
@@ -253,7 +218,6 @@
         
     }
     
-    /* створення таблиці із заголовним рядком і пустими комірками для заповнення */
     function createTheTable () {
         var forSorting = ['name', 'email', 'img', 'skills', 'control'];
         studentsTable = document.createElement('table');
@@ -287,8 +251,6 @@
     
     }
     
-    /* Створення одного пустого рядка таблиці - потрібне і для побудови базової таблиці 
-    і для додавання нових студентів у список */
     function createOneRow (index) {
         var tr = document.createElement('tr');
         tr.className = 'tr' + index;
@@ -300,7 +262,6 @@
         tbody.appendChild(tr);
     }
     
-    /* заповнення рядка даними одного студента */
     function oneStudent (studentsIndex) {
         var editIco = '<i class="glyphicon glyphicon-edit editStudent"></i>';
         var removeIco = '<i class="glyphicon glyphicon-trash removeStudent"></i>';
@@ -318,14 +279,12 @@
         }
     }
     
-    /* заповнення таблиці студентами */
     function fillTheTable() {
         for (var j = 0; j < students.length; j++) {
             oneStudent (j);
         }      
     }
     
-    /* виведення імені та прізвища студента у діалоговому вікні */
     function alertStudent(event) {
         var target = event.target;
         console.log('student');
@@ -345,7 +304,7 @@
             formFields[i].value = '';
         }
     }
-    /* створення новго студента і додавання його даних у таблицю */
+    
     function saveAndEditStudent (index) {
         var successfulValidation = 0;
         var existingEmail = false;
@@ -420,7 +379,6 @@
         }
     }
     
-    /* видалення існуючого студента із масиву і з таблиці */
     function removeStudent (index) {
         var target = document.querySelectorAll('.tBody tr')[index];
         students.splice(index, 1);
@@ -431,8 +389,6 @@
         }
     }
     
-    /* обробник кнопки  EDIT - переносить вміст рядка, до якого належить клікнута кнопка 
-    у форму для редагування */
     function editStudent (index) {
         var target = document.querySelectorAll('.tBody tr')[index];
         var fields = document.querySelectorAll('.fieldsContainer input');
@@ -450,12 +406,9 @@
             fields[i+1].value = fieldValue;
         }
         
-        /* перемикання функції saveAndEditStudent в режим редагування */ 
         saveOrEdit = 1;
     }
     
-    /* новий метод сортування масивів з об'єктами із вказуванням поля за 
-    значенням якого відбуватиметься сортування і з можливістю реверсії */
     Array.prototype.sortKey = function(key, direction) {
         function mySorting(k1, k2) {
             if(direction) {
@@ -471,7 +424,6 @@
         return this.sort(mySorting);
     }
     
-    /* здійснювання сортування та керування іконками */
     function sorting(event) {
         var changeIcon = event.target.firstChild;
         if(changeIcon.className === 'glyphicon glyphicon-sort' || changeIcon.className === 'glyphicon glyphicon-sort-by-alphabet-alt') {
@@ -487,35 +439,14 @@
         fillTheTable();
     } 
     
-    /* обробник кнопок-сортувальників */
     function sortingTable (event) {
         sorting(event);
     }
 
-    function validation (index) {
-        
-        var studentsPhotoURL = /^(?:(?:https?)+\:\/\/+[a-zA-Z0-9\/\._-]{1,})+(?:(?:jpe?g|png|gif))$/gim
-    }
-    /* завершення блоку із функціями */
-    
-    /* ПОБУДОВА ТАБЛИЦІ ПРИ ЗАВАНТАЖЕННЯ СТОРІНКИ */
     createTheForm ();
     createTheTable ();
     fillTheTable();
-    /* завершення побудови таблиці */
-    /*
-    function deleteClickhandler(id) {
-       userRow = table.queryselector('tr[data-id='+ id +']');
-        table.delete(userRow);
-        studernRecord = students.filter(student) {
-            return student.id == userId;
-        }[0];
-        students.splice(0,userId);
-        
-    }*/
-    /* ПРИКРІПЛЮВАННЯ ОБРОБНИКІВ ПОДІЙ */
-    
-    /* відслідковування події click для тіла таблиці, щоб виводити імена студентів цільового для події рядка */
+
     container.querySelector('tbody').addEventListener('click', function(e){
         var userRow = e.target.closest('tr');
         var userId = userRow.getAttribute('data-id');
@@ -539,6 +470,4 @@
     container.querySelector('th.name').addEventListener('click', sortingTable);
     
     container.querySelector('th.email').addEventListener('click', sortingTable);
-    
-    /* завершення прикріплювання обробників */
 })();
