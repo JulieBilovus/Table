@@ -1,0 +1,32 @@
+* {
+    margin:0;
+    padding: 0;
+}
+
+*:focus {
+    outline: none;
+}
+
+table td {
+    vertical-align: middle !important; 
+}
+
+table img {
+    max-width: 200px;
+}
+
+i, th {
+    cursor: pointer;
+}
+
+form {
+    margin-bottom: 40px;
+}
+
+h1, input {
+    margin: 10px !important;
+}
+
+.glyphicon {
+    margin: 0 10px;
+}
